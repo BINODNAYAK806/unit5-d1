@@ -3,7 +3,7 @@ async function display(){
 let pokemon_name=await pokemon.json()
 // console.log(pokemon_name)
 var dis_cont=document.getElementById("tab");
-let pokemon_local=localStorage.getItem("pokemon_inlocal")?JSON.parse(localStorage.getItem("pokemon_inlocal")):[];
+let pokemon_local=localStorage.getItem("pk")?JSON.parse(localStorage.getItem("pk")):[];
 if(pokemon_local.length==0){
   pokemon_name.results.forEach(e => {
       var cont_div=document.createElement("div")
@@ -13,7 +13,7 @@ if(pokemon_local.length==0){
       cont_div.append(pokemon_name_dis)
       dis_cont.append(cont_div)
       pokemon_local.push(e.name)
-      localStorage.setItem("pokemon_inlocal",JSON.stringify(pokemon_local))
+      localStorage.setItem("pk",JSON.stringify(pokemon_local))
   });
  
   
@@ -32,3 +32,12 @@ else{
 }
 }
 display()
+
+
+function get() {
+
+
+
+
+
+} 

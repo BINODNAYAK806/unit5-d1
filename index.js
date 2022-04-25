@@ -1,40 +1,34 @@
-// function giveUsers() {
-
-//     for (let i = 0; i < 10; i++) {
-//     fetch('https://randomuser.me/api/')
-//       .then(function (response) {
-//         return response.json();
-//     })
+async function display(){
+  let pokemon=await fetch(`https://pokeapi.co/api/v2/pokemon`)
+let pokemon_name=await pokemon.json()
+// console.log(pokemon_name)
+var dis_cont=document.getElementById("tab");
+let pokemon_local=localStorage.getItem("pokemon_inlocal")?JSON.parse(localStorage.getItem("pokemon_inlocal")):[];
+if(pokemon_local.length==0){
+  pokemon_name.results.forEach(e => {
+      var cont_div=document.createElement("div")
+      cont_div.setAttribute("id","dis_cont")
+      var  pokemon_name_dis=document.createElement("b")
+      pokemon_name_dis.innerText=e.name;
+      cont_div.append(pokemon_name_dis)
+      dis_cont.append(cont_div)
+      pokemon_local.push(e.name)
+      localStorage.setItem("pokemon_inlocal",JSON.stringify(pokemon_local))
+  });
+ 
   
-//     .then(function (data) {
-//       showUsers(data.results);
-//     })
-  
-//     .catch(function (error) {
-//       console.log("error", error);
-//     });
-  
-//     let showUsers = (users) => {
-//         users.forEach(user => {
-//           // console.log(user.registered.age);
-//           // console.log(user.location.city);
-//           let firstName = user.name.first;
-//           let id = user.id;
-  
-//           console.log(firstName);
-//           localStorage.setItem('allUsers', firstName);  
-//        });
-//     };}
-//   }
-  
-  
-//   if(localStorage.getItem('allUsers')){
-//     console.log(localStorage.getItem('allUsers'));
-//   }
-
-
-//   giveUsers()
-
-  fetch('https://pokeapi.co/api/v2/{endpoint}/')
-  .then(response => response.json())
-  .then(data => console.log(data));
+}
+else{
+  // dis_cont.innerHTML=""
+  // console.log(pokemon_local)
+  pokemon_local.forEach(e => {
+      var cont_div=document.createElement("div")
+      cont_div.setAttribute("id","dis_cont")
+      var  pokemon_name_dis=document.createElement("b")
+      pokemon_name_dis.innerText=e;
+      cont_div.append(pokemon_name_dis)
+      dis_cont.append(cont_div)
+  });
+}
+}
+display()
